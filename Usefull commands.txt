@@ -1,0 +1,120 @@
+CORN Expression to Schedule the Jenkins Job
+H/5 * * * *
+
+sfdx force:auth:jwt:grant --clientid 3MVG9kBt168mda_9ciWRsdRkkz7aSRR5EFhyfJPN.S1SVUkLmw7RZ716t9sRJP1GUK8FQlj5I.4AhBGgYoPvY --username amitasinghsfdc@gmail.com.prod --jwtkeyfile D:\UdemyCourses\Deployment\JWT\server.key -d --instanceurl https://login.salesforce.com/
+
+Production Consumer Key - 
+3MVG9kBt168mda_9ciWRsdRkkz7aSRR5EFhyfJPN.S1SVUkLmw7RZ716t9sRJP1GUK8FQlj5I.4AhBGgYoPvY
+
+Production Username - 
+amitasinghsfdc@gmail.com.prod
+
+Redirect URL - 
+http://localhost:1717/OauthRedirect
+
+#Step1 - 
+Generate Private Key  - openssl genrsa -des3 -passout pass:x123 -out server.pass.key 2048
+
+Step2 - 
+Generate Key file using private key - openssl rsa -passin pass:x123 -in server.pass.key -out server.key
+
+#Step3 - 
+Generate the certificate file - openssl req -new -key server.key -out server.csr
+
+#Step4 - 
+Generate the SSL certificate - openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
+
+# Variables to Create in Environment variable
+HUB_ORG_DH - username of the target org
+SFDC_HOST_DH - the login url
+CONNECTED_APP_CONSUMER_KEY_DH - the connected application client id of the target org
+JWT_CRED_ID_DH
+
+Consumer Key for Sandbox1:
+
+3MVG9Fy_1ZngbXqOGr4_8wSrJuOeIso5iitLpULZGh7jAE7l92VmpOudzi7wgb1oLCa8iqsrpYGQjrUOLzkSy
+
+Variables: 
+
+HUB_ORG_SB - amitasinghsfdc@gmail.com.prod.dev
+PASSWORD_HDFC - Udemy@2021a6J7r7BBmiRO8HzUsUbOrPeIt
+SFDC_HOST_SB - https://test.salesforce.com
+CONNECTED_APP_CONSUMER_KEY_SB - 
+
+sfdx force:auth:jwt:grant --clientid 3MVG9Fy_1ZngbXqOGr4_8wSrJuOeIso5iitLpULZGh7jAE7l92VmpOudzi7wgb1oLCa8iqsrpYGQjrUOLzkSy --username amitasinghsfdc@gmail.com.prod.dev --jwtkeyfile D:\UdemyCourses\Deployment\JWT\server.key -d --instanceurl https://test.salesforce.com/
+
+#Link to Download SFDX CLI in yml pipeline
+
+https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
+
+
+{
+  "orgName": "TechFuge Indua Pvt. Ltd.",
+  "edition": "Enterprise",
+  "features": ["Communities", "ServiceCloud", "PersonAccounts", "MultiCurrency","B2BCommerce"],
+  "settings": {
+      "communitiesSettings": {
+          "enableNetworksEnabled": true
+      },
+      "mobileSettings": {
+          "enableS1EncryptedStoragePref2": true
+      },
+      "omniChannelSettings": {
+          "enableOmniChannel": true
+      },
+      "caseSettings": {
+          "systemUserEmail": "support@acme.com"
+      }
+  },
+  "objectSettings": {
+      "opportunity": {
+        "sharingModel": "private",
+        "defaultRecordType": "default"
+      },
+      "account": {
+        "defaultRecordType": "default"
+      }
+  }
+}
+
+
+ssh -T git@bitbucket.org
+
+
+branches:
+    development:
+      - step:
+          name: 'Deploy to test environment Message'
+          script:
+          - echo Deploying to test environment
+      - step:
+          name: 'Deploy to test environment'
+          deployment: test
+          # run the pipeline if changes were made to any of the actual metadata
+          condition:
+              changesets:
+                  includePaths:
+                    - "force-app/main/default/**"
+                    - "src/**"
+					
+pull-requests:
+  
+    development:
+      - step:
+          name: 'Run Step from PR'
+          script:
+            - echo 'I am from PR in Developmet branch'
+      - step:
+          name: 'Perform Validation due to PR'
+          script:
+            - echo 'I am from PR in Developmet branch'
+            
+    master:
+      - step:
+          name: 'Run Step from PR'
+          script:
+            - echo 'I am from PR in master branch'
+      - step:
+          name: 'Perform Validation due to PR'
+          script:
+            - echo 'I am from PR in master branch'

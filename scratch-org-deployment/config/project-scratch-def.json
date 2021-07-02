@@ -1,0 +1,30 @@
+{
+  "orgName": "TechFuge Indua Pvt. Ltd.",
+  "edition": "Enterprise",
+  "features": ["Communities", "ServiceCloud", "PersonAccounts", "MultiCurrency","B2BCommerce"],
+  "release__c" : "Release-1.2.3",
+  "userStory__c" : "US-2331",
+  "settings": {
+      "communitiesSettings": {
+          "enableNetworksEnabled": true
+      },
+      "mobileSettings": {
+          "enableS1EncryptedStoragePref2": true
+      },
+      "omniChannelSettings": {
+          "enableOmniChannel": true
+      },
+      "caseSettings": {
+          "systemUserEmail": "support@acme.com"
+      }
+  },
+  "objectSettings": {
+      "opportunity": {
+        "sharingModel": "private",
+        "defaultRecordType": "default"
+      },
+      "account": {
+        "defaultRecordType": "default"
+      }
+  }
+}
