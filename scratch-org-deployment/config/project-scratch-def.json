@@ -6,7 +6,7 @@
   "userStory__c" : "US-2331",
   "settings": {
       "communitiesSettings": {
-          "enableNetworksEnabled": true
+          "enableNetworksEna0bled": true
       },
       "mobileSettings": {
           "enableS1EncryptedStoragePref2": true
